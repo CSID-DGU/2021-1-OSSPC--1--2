@@ -72,11 +72,20 @@ class Menu:
         Var.click.play()
         self.menu.clear()
         self.menu.add_vertical_margin(self.margin_main)
-        self.menu.add_text_input('ID : ', maxchar=100, onreturn=self.save_id, font_size=self.font_sub)
-        self.menu.add_text_input('PASSWORD : ', maxchar=100, onreturn=self.save_password,password=True, password_char='*', font_size=self.font_sub)
+        self.menu.add_text_input('ID : ', maxchar=100, onreturn=self.compare_id, font_size=self.font_sub)
+        # self.menu.add_text_input('PASSWORD : ', maxchar=100, onreturn=self.save_password,password=True, password_char='*', font_size=self.font_sub)
         self.menu.add_button('  Log In   ', self.show_list,font_size=self.font_sub)
         self.menu.add_button('  back  ', self.first_page, font_size=self.font_sub)
         self.menu.add_button('        Quit         ', pygame_menu.events.EXIT,font_size=self.font_sub)
+
+    def compare_id(self,value):
+        self.id=value
+        self.id_data= self.database.load_id_data()
+        for ids in self.id_data:
+            if ids == self.id:
+                self.show_list()
+
+
 
     def save_id(self,value): #아이디 저장해서 데이터 베이스로 넘기기
         self.id=value
@@ -115,7 +124,7 @@ class Menu:
         self.menu.add_button('    Show Rank    ', self.show_rank,font_size=self.font_sub)
         self.menu.add_button('  Help  ', self.help, font_size=self.font_sub)
         self.menu.add_button('   Select theme   ',self.change_theme,font_size=self.font_sub)
-        self.menu.add_button(' back ', self.login, font_size=self.font_sub)
+        self.menu.add_button(' back ', self.login_page, font_size=self.font_sub)
         self.menu.add_button('        Quit         ', pygame_menu.events.EXIT,font_size=self.font_sub)
 
 

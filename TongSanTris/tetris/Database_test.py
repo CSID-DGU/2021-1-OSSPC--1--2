@@ -10,6 +10,7 @@ class Database:
             db='tongsantris',
             charset='utf8'
         )
+        global tmp
 
 
     def load_id_data(self):
@@ -32,6 +33,7 @@ class Database:
 
     def add_id_data(self,user_id):
         #추가하기
+        tmp=user_id
         curs = self.score_db.cursor()
         # 데이터베이스에 같은 id가 이미 존재하면 에러 메세지 띄우는 코드 필요.
         sql = "INSERT INTO users (user_id) VALUES (%s)"
